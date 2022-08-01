@@ -6,8 +6,8 @@ import sys, os
 # from sensors.mpu import MPU
 
 TIME_STEP = 32
-DATA_COLLECTION_TIME_SEG = 2
-COLLECTION_NUMBER = 2 #10000
+DATA_COLLECTION_TIME_SEG = 10
+COLLECTION_NUMBER = 2 #3000
 NAME_FILE = "../movement_controller/stop_controller.txt"
 
 supervisor = Supervisor()
