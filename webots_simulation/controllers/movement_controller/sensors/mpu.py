@@ -1,5 +1,6 @@
 from controller import Accelerometer, Gyro, Compass
 import math
+from sensors.data import Data
 
 # Acelaracao da gravidade
 g = 9.807
@@ -62,6 +63,20 @@ class MPU():
         self.accel = Acelerometro("acelerometro_"+str(mpu_number), time_step)
         self.gyro = _Gyro("giroscopio_"+str(mpu_number), time_step)
         self.mag = Magnetometro("magnetometro_"+str(mpu_number), time_step)
+        self.current_step = 0
+        self.update_step = time_step
+        self.data = Data("mpu_"+str(mpu_number), size_sample=9)
+    
+    def update(self):
+        self.current_step += 1
+        if (self.current_step >= self.update_step):
+            # print("Update MPU")
+            self.current_step = 0
+            sample = self.get_accel() + self.get_gyro() + self.get_mag()
+            self.data.update(sample)
+
+    def save(self):
+        self.data.save()
         
     def get_accel(self):
         return self.accel.get_value()

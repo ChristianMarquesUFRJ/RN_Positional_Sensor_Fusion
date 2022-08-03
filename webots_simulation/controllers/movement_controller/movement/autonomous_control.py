@@ -1,5 +1,5 @@
 import random as rand
-rand.seed(25)
+# rand.seed(25)
 
 PERCENT_TO_ROTATE = 0.99
 PERCENT_OF_LINEAR_SPEED = 0.6
@@ -46,10 +46,10 @@ class autonomous_control():
             value = rand.randrange(0, 100, 1)/100
             if(value <= 0.44):
                 self.angle = self.update_angle(self.angle+self.angleOffset)
-                print("+", str(self.angleOffset))
+                # print("+", str(self.angleOffset))
             elif(value <= 0.88):
                 self.angle = self.update_angle(self.angle-self.angleOffset)
-                print("-", str(self.angleOffset))
+                # print("-", str(self.angleOffset))
             else:
                 self.angle = 0.0
                 # print("+", str(self.angleOffset))

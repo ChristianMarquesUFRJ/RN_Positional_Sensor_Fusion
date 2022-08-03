@@ -13,21 +13,21 @@ class _GPS():
         # Setup dos GPS's
         self.sensor.enable(time_step)
         self.name = sensor_name
-
-        print("DATA")
-        self.data = Data(sensor_name)
+        self.current_step = 0
+        self.update_step = time_step
+        self.data = Data(sensor_name, size_sample=3)
     
     def update(self):
-        sample = self.get_value()
-        self.data.update(sample)
+        self.current_step += 1
+        if (self.current_step >= self.update_step):
+            # print("Update GPS")
+            self.current_step = 0
+            sample = self.get_value()
+            self.data.update(sample)
 
 
     def save(self):
         self.data.save()
-    
-    def load(self):
-        print("Array salvo no arquivo:")
-        print(self.data.load())
         
     def get_value(self):
         latitude, longitude, altitude = self.sensor.getValues()
