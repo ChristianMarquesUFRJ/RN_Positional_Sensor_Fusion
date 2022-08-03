@@ -6,9 +6,9 @@ from sensors.data import Data
 g = 9.807
 
 # Numero de casas para formatacao
-decimal_places = 4
-def format_digits(x, y, z):
-    return round(x, decimal_places), round(y, decimal_places), round(z, decimal_places)
+# decimal_places = 4
+# def format_digits(x, y, z):
+#     return round(x, decimal_places), round(y, decimal_places), round(z, decimal_places)
 
 class Acelerometro():
     def __init__(self, sensor_name, time_step):
@@ -22,7 +22,8 @@ class Acelerometro():
         x, y, z = self.acelerometro.getValues()
         # Converte em G's
         x, y, z = x/g, y/g, z/g
-        return format_digits(x, y, z)
+        # return format_digits(x, y, z)
+        return x, y, z
 
 class _Gyro():
     def __init__(self, sensor_name, time_step):
@@ -36,7 +37,8 @@ class _Gyro():
         x, y, z = self.giroscopio.getValues()
         # Converte em graus/s
         x, y, z = math.degrees(x), math.degrees(y), math.degrees(z)
-        return format_digits(x, y, z)
+        # return format_digits(x, y, z)
+        return x, y, z
 
 class Magnetometro():
     def __init__(self, sensor_name, time_step):
@@ -54,7 +56,8 @@ class Magnetometro():
 
         # Converte em microTesla
         x, y, z = converter_uT(x), converter_uT(y), converter_uT(z)
-        return format_digits(x,y,z)
+        # return format_digits(x, y, z)
+        return x, y, z
 
 
 class MPU():

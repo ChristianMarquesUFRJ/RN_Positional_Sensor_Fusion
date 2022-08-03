@@ -11,7 +11,7 @@ import sys
 driver = Driver()
 basicTimeStep = int(driver.getBasicTimeStep())
 
-DATA_COLLECTION_TIME_SEG = 5
+DATA_COLLECTION_TIME_SEG = 30
 DATA_COLLECTION_TIME_STEP = DATA_COLLECTION_TIME_SEG*1000/basicTimeStep
 
 encoder_update_time_ms = 200

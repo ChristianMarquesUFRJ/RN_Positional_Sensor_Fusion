@@ -2,9 +2,9 @@ from controller import GPS
 from sensors.data import Data
 
 # Numero de casas para formatacao
-decimal_places = 6
-def format_digits(x, y, z):
-    return round(x, decimal_places), round(y, decimal_places), round(z, decimal_places)
+# decimal_places = 6
+# def format_digits(x, y, z):
+#     return round(x, decimal_places), round(y, decimal_places), round(z, decimal_places)
 
 class _GPS():
     def __init__(self, sensor_name, time_step):
@@ -31,4 +31,5 @@ class _GPS():
         
     def get_value(self):
         latitude, longitude, altitude = self.sensor.getValues()
-        return format_digits(latitude, longitude, altitude)
+        # return format_digits(latitude, longitude, altitude)
+        return latitude, longitude, altitude

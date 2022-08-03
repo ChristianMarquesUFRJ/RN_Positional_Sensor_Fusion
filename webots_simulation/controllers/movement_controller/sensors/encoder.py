@@ -7,6 +7,11 @@ wheel_complete_turn_m = wheel_diameter_m * math.pi
 num_ticks = 4
 wheel_axis_m = 0.325
 
+# Numero de casas para formatacao
+# decimal_places = 4
+# def format_digits(x, y):
+#     return round(x, decimal_places), round(y, decimal_places)
+
 class Encoders():
     def __init__(self, left_sensor_name, right_sensor_name, time_step, update_step):
         self.left_encoder = Encoder(left_sensor_name, time_step, update_step)
@@ -29,6 +34,7 @@ class Encoders():
         # print(str(round(left_wheel_ticks,2)), " | ", str(round(right_wheel_ticks,2)))
         linear = (left_speed + right_speed)/2
         angular = (right_speed - left_speed)/wheel_axis_m
+        # return format_digits(linear, angular)
         return linear, angular
 
     def save(self):
