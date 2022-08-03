@@ -17,13 +17,14 @@ class _GPS():
         self.update_step = time_step
         self.data = Data(sensor_name, size_sample=3)
     
-    def update(self):
+    def update(self, repeat = 4):
         self.current_step += 1
         if (self.current_step >= self.update_step):
             # print("Update GPS")
             self.current_step = 0
             sample = self.get_value()
-            self.data.update(sample)
+            for _ in range(0, repeat):
+                self.data.update(sample)
 
 
     def save(self):
