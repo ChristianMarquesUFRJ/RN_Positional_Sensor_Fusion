@@ -23,7 +23,7 @@ class _GPS():
             # print("Update GPS")
             self.current_step = 0
             sample = self.get_value()
-            for _ in range(0, repeat):
+            for _ in range(0, repeat+1):
                 self.data.update(sample)
 
 
