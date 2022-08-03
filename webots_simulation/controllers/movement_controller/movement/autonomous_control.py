@@ -11,7 +11,7 @@ class autonomous_control():
         self.speed = 0
         self.speedOffset = 5
         #Angulo incial e sua variação
-        self.angle = 0.0
+        self.angle =  0.0
         self.angleOffset = 0.1
         #Velocidade e angulo maximos
         self.maxSpeed = 50
@@ -44,12 +44,19 @@ class autonomous_control():
         value = rand.randrange(0, 100, 1)/100
         if (value >= PERCENT_TO_ROTATE):
             value = rand.randrange(0, 100, 1)/100
-            if(value <= 0.33):
+            if(value <= 0.44):
                 self.angle = self.update_angle(self.angle+self.angleOffset)
+<<<<<<< HEAD
                 # print("+", str(self.angleOffset))
             elif(value <= 0.66):
                 self.angle = self.update_angle(self.angle+self.angleOffset)
                 # print("-", str(self.angleOffset))
+=======
+                print("+", str(self.angleOffset))
+            elif(value <= 0.88):
+                self.angle = self.update_angle(self.angle-self.angleOffset)
+                print("-", str(self.angleOffset))
+>>>>>>> 7f0ec26ed0656bd8bce9b36c91dfc11e06519f3d
             else:
                 self.angle = 0.0
                 # print("+", str(self.angleOffset))

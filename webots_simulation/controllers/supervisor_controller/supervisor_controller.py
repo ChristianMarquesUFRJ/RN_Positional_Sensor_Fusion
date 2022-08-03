@@ -1,4 +1,5 @@
 """RN_controller controller."""
+import random as rand
 from controller import Supervisor, Node
 import sys, os
 import time
@@ -34,6 +35,11 @@ def start_world_from_zero(atlas_robot):
 if os.path.exists(NAME_FILE):
     os.remove(NAME_FILE)
 
+robot_node = supervisor.getFromDef("Atlas")
+
+robot_node.getField("rotation").setSFRotation([0.06976452663644146, -0.1319270503704006, 0.9888013775292586, 0.649943 + rand.randrange(-100, 100, 1)/100])
+
+
 # Main loop:
 while supervisor.step(TIME_STEP) != -1:
     for id in range(COLLECTION_NUMBER):
@@ -43,7 +49,6 @@ while supervisor.step(TIME_STEP) != -1:
             current_time_step += 1
             robot_node = supervisor.getFromDef("Atlas")
             origin_node = supervisor.getFromDef("origem")
-
             position = robot_node.getPosition()
             orientation = robot_node.getOrientation()
 
