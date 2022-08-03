@@ -1,0 +1,32 @@
+Arquivos de coleta de dados:
+    - Supervisor
+        Pose: (x,y,θ)                                                                   -> Atualização: 200ms   
+    - Atlas
+        > Encoder: (vel_lin, vel_ang)                                                   -> Atualização: 200ms
+        > IMU: ((acc_x, acc_y, acc_z), (gyro_x, gyro_y, gyro_z), (mag_x, mag_y, mag_z)) -> Atualização: 200ms
+        > GPS: (lat, long, alt)                                                         -> Atualização: 1000ms
+
+Formatação dos vetores de salvamento das informações dos sensores:
+    - Sensor[id_trajetoria][[amostras_trajetoria[...]]
+    - [
+        [
+            [1,1,1],[2,2,2],[...]
+        ], 
+        [
+            [1,1,1],[2,2,2],[...]
+        ], 
+        [
+            ...
+        ]
+    ]
+
+
+[1,1,1,2,2,2]
+
+Arquivos:
+    - Pose_real
+    - Encoder
+    - Imu_1
+    - Imu_2
+    - Gps_1
+    - Gps_2

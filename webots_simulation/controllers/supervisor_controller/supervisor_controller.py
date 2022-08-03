@@ -1,12 +1,14 @@
 """RN_controller controller."""
 from controller import Supervisor, Node
 import sys, os
+import time
+start_time = int(round(time.time() * 1000))
 # from sensors.encoder import Encoder
 # from sensors.gps import _GPS
 # from sensors.mpu import MPU
 
-TIME_STEP = 32
-DATA_COLLECTION_TIME_SEG = 10
+TIME_STEP = 5
+DATA_COLLECTION_TIME_SEG = 2#30
 COLLECTION_NUMBER = 2 #3000
 NAME_FILE = "../movement_controller/stop_controller.txt"
 
@@ -19,6 +21,9 @@ supervisor = Supervisor()
 # gps2 = _GPS("gps_real_2",TIME_STEP)
 # mpu1 = MPU(1,TIME_STEP)
 # mpu2 = MPU(2,TIME_STEP)
+
+def millis():
+    return int(round(time.time() * 1000)) - start_time
 
 def start_world_from_zero(atlas_robot):
     print("Iniciando a simulacao...")
@@ -33,7 +38,9 @@ if os.path.exists(NAME_FILE):
 while supervisor.step(TIME_STEP) != -1:
     for id in range(COLLECTION_NUMBER):
         print("Nº " + str(id+1))
+        current_time_step = 0
         while supervisor.step(TIME_STEP) != -1:
+            current_time_step += 1
             robot_node = supervisor.getFromDef("Atlas")
             origin_node = supervisor.getFromDef("origem")
 
@@ -45,8 +52,10 @@ while supervisor.step(TIME_STEP) != -1:
             if (sim_time >= DATA_COLLECTION_TIME_SEG):
                 start_world_from_zero(robot_node)
                 break
-                
-        
+
+            # if(current_time_step % 200 == 0):
+            #     current_time_step = 0
+
             # Obtencao dos valores dos sensores
             # wheel_ticks_values = left_encoder.get_ticks(), right_encoder.get_ticks()
             # accel1_values, gyro1_values, mag1_values = mpu1.get_accel(), mpu1.get_gyro(), mpu1.get_mag()
@@ -54,22 +63,14 @@ while supervisor.step(TIME_STEP) != -1:
             # gps1_values = gps1.get_value()
             # gps2_values = gps2.get_value() 
 
-        
-            # Visualizacao no terminal
-            # print("Encoder" + str(wheel_ticks_values), end=" | ")
-            # print("MPU1[" + str(accel1_values) + "g; " + str(gyro1_values) + "*/s; " + str(mag1_values) + "uT]", end=" | ")
-            # # print("MPU2[" + str(accel2_values) + "g; " + str(gyro2_values) + "*/s; " + str(mag2_values) + "uT]", end=" | ")
-            # print("GPS1" + str(gps1_values), end=" | ")
-            # # print("GPS2" + str(gps2_values), end=" | ")
-            # print("")
-
             # pose = robot_node.getPose()
-            print("Supervisor: " + str(sim_time) + " - posicao: " + str(position))
+            # print("Supervisor: Tempo simulacao =" + str(sim_time) + " || Tempo PC = " + str(millis()/1000))
             # print("Encoder" + str(wheel_ticks_values))
-            # print("Supervisor - pose: " + str(position) + " | " + str(orientation))
+            print("Supervisor - orientation: " + str(orientation) + "\n")
             # print(sim_time)
 
     print("\n>>>> ACABOU A PAÇOCA")
     open(NAME_FILE, mode='a').close()
     start_time = supervisor.getTime()
+    # supervisor.simulationQuit(0)
     supervisor.simulationQuit(EXIT_SUCCESS)
