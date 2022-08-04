@@ -44,10 +44,10 @@ class autonomous_control():
         value = rand.randrange(0, 100, 1)/100
         if (value >= PERCENT_TO_ROTATE):
             value = rand.randrange(0, 100, 1)/100
-            if(value <= 0.44):
+            if(value <= 0.33):
                 self.angle = self.update_angle(self.angle+self.angleOffset)
                 # print("+", str(self.angleOffset))
-            elif(value <= 0.88):
+            elif(value <= 0.66):
                 self.angle = self.update_angle(self.angle-self.angleOffset)
                 # print("-", str(self.angleOffset))
             else:
