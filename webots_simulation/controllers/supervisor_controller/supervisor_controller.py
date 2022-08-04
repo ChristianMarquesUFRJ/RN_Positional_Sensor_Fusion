@@ -52,7 +52,10 @@ while supervisor.step(TIME_STEP) != -1:
             if (current_time_step > DATA_COLLECTION_TIME_STEP):
                 data_save.save()
                 start_world_from_zero(robot_node)
+                start_time_trajectory = millis()*1000
                 break
+            elif (current_time_step == 1):
+                start_time_trajectory = millis()*1000
 
             if (current_step_sensor >= (TIME_UPDATE_POSE / TIME_STEP)):
                 current_step_sensor = 0
