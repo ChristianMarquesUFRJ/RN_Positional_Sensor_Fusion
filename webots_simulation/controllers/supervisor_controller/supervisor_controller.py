@@ -38,6 +38,9 @@ robot_node = supervisor.getFromDef("Atlas")
 
 robot_node.getField("rotation").setSFRotation([0.06976452663644146, -0.1319270503704006, 0.9888013775292586, 0.649943 + rand.randrange(-100, 100, 1)/100])
 
+gps1_node = supervisor.getFromDef("gps_real_1")
+
+gps1_node.getField("accuracy").setSFFloat(1)
 
 # Main loop:
 while supervisor.step(TIME_STEP) != -1:
